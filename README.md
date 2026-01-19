@@ -4,7 +4,7 @@ Fishbone Trehalose is a library mod provides only util methods in a manner which
 
 Things made player riding possible:
 
-- Redirect `canSerialize()` in `addPassenger()` to a custom method which returns `true`.
+- Redirect `EntityType.canSerialize()` in `Entity.addPassenger(Entity)` to a custom method which returns `true`.
 - Send `ClientboundSetPassengersPacket` to the vehicle player when mounting or dismounting.
 
 Other utils:

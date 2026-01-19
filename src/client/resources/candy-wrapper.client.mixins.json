@@ -1,9 +1,0 @@
-{
-    "required": true,
-    "package": "net.hederamc.sugar.client.mixin",
-    "compatibilityLevel": "JAVA_21",
-    "client": [],
-    "injectors": {
-        "defaultRequire": 1
-    }
-}

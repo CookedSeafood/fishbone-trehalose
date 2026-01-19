@@ -1,0 +1,9 @@
+{
+    "required": true,
+    "package": "net.hederamc.fishbonetrehalose.client.mixin",
+    "compatibilityLevel": "JAVA_21",
+    "client": [],
+    "injectors": {
+        "defaultRequire": 1
+    }
+}

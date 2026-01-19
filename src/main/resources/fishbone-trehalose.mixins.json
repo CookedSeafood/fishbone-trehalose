@@ -1,0 +1,19 @@
+{
+    "required": true,
+    "package": "net.hederamc.fishbonetrehalose.mixin",
+    "compatibilityLevel": "JAVA_21",
+    "mixins": [
+        "CustomBossEventsMixin",
+        "CustomDataMixin",
+        "EntityMixin",
+        "ItemEnchantmentsMixin",
+        "ItemMixin",
+        "LivingEntityMixin",
+        "MutableComponentMixin",
+        "PlayerMixin",
+        "ScoreboardMixin"
+    ],
+    "injectors": {
+        "defaultRequire": 1
+    }
+}

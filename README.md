@@ -1,44 +1,49 @@
-# Candy Wrapper
+# Fishbone Trehalose
 
-Candy Warpper is a library mod provides only util methods in a manner which prioritises OOP.
+Fishbone Trehalose is a library mod provides only util methods in a manner which prioritises OOP.
 
 Things made player riding possible:
 
-- Redirect `isSaveable()` in `addPassenger()` to a custom method which returns `isPlayer()` if not saveable.
-- Send `EntityPassengersSetS2CPacket` to the vehicle player when mounting or dismounting.
+- Redirect `canSerialize()` in `addPassenger()` to a custom method which returns `true`.
+- Send `ClientboundSetPassengersPacket` to the vehicle player when mounting or dismounting.
 
 Other utils:
 
 ```java
-public class ItemEnchantmentsComponent {
+public class ItemEnchantments {
     public int getLevel(String enchantment) {}
 }
 ```
 
 ```java
 public class Scoreboard {
-    public ScoreboardObjective getOrAddObjective(String name, ScoreboardCriterion criterion, Text displayName, ScoreboardCriterion.RenderType renderType, boolean displayAutoUpdate, @Nullable NumberFormat numberFormat) {}
+    public boolean containsObjective(String name) {}
 
-    public Team getOrAddTeam(String name) {}
+    public Objective getOrAddObjective(String name, ObjectiveCriteria criterion, Component displayName, RenderType renderType, boolean displayAutoUpdate, @Nullable NumberFormat numberFormat)
+
+    public boolean containsPlayerTeam(String name) {}
+
+    public Team getOrAddPlayerTeam(String name) {}
 }
 ```
 
 ```java
 public abstract class Entity {
-    public double getLerpedX(float tickProgress) {}
+    public double getX(float partialTickTime) {}
 
-    public double getLerpedY(float tickProgress) {}
+    public double getY(float partialTickTime) {}
 
-    public double getLerpedZ(float tickProgress) {}
+    public double getZ(float partialTickTime) {}
 
-    // A shortcut of .getCommandTags().contains(commandTag)
-    public boolean hasCommandTag(String commandTag) {}
+    public Set<String> getTags() {}
+
+    public boolean hasTag(String tag) {}
 }
 ```
 
 ```java
-public class BossBarManager {
-    public CommandBossBar getOrAdd(Identifier id, Text displayName) {}
+public class CustomBossEvents {
+    public CommandBossBar getOrCreate(Identifier id, Component displayName) {}
 
     public boolean containsKey(Identifier id) {}
 
@@ -47,35 +52,8 @@ public class BossBarManager {
 ```
 
 ```java
-public abstract class BossBar {
-    public static enum Color {
-        public Formatting getFormat() {}
-    }
-}
-```
-
-```java
-public class NbtCompound {
-    public Map<? extends String, ? extends NbtElement> getEntries() {}
-
-    public Set<String> keySet() {}
-
-    public void putAll(NbtCompound entries) {}
-}
-```
-
-```java
-public class NbtComponent {
-    public NbtComponent copyFrom(NbtComponent nbtComponent) {}
-}
-```
-
-```java
-public final class ItemStack {
-    public Identifier getId() {}
-
-    // A shortcut of .getRegistryEntry().getIdAsString()
-    public String getIdAsString() {}
+public class CustomData {
+    public CustomData merge(CustomData other) {}
 }
 ```
 
@@ -83,51 +61,46 @@ public final class ItemStack {
 public final class Item {
     public Identifier getId() {}
 
-    // A shortcut of .getRegistryEntry().getIdAsString()
-    public String getIdAsString() {}
-
-    public boolean isIn(TagKey<Item> tag) {}
-
-    public boolean isIn(RegistryEntryList<Item> registryEntryList) {}
+    public Holder.Reference<Item> getRegistryHolder() {}
 }
 ```
 
 ```java
-public abstract class PlayerEntity {
+public abstract class Player {
     public ScoreHolder getScoreHolder() {}
 }
 ```
 
 ```java
 public abstract class LivingEntity {
-    public List<Entry<RegistryEntry<Enchantment>>> getEnchantments(RegistryKey<Enchantment> key) {}
+    public List<Entry<Holder<Enchantment>>> getEnchantments(ResourceKey<Enchantment> key) {}
 
-    public List<Entry<RegistryEntry<Enchantment>>> getEnchantments() {}
+    public List<Entry<Holder<Enchantment>>> getEnchantments() {}
 
     public void setDead(boolean dead) {}
 
-    public float getLerpedBodyYaw(float tickProgress) {}
+    public float getBodyYaw(float partialTickTime) {}
 
-    public float getLerpedHeadYaw(float tickProgress) {}
+    public float getHeadYaw(float partialTickTime) {}
 
     public ScoreHolder getScoreHolder() {}
 }
 ```
 
 ```java
-public abstract class BossBars {
-    public abstract class Colors {
-        public static String getName(Formatting format) {}
+public abstract class BossEvents {
+    public abstract class BossBarColors {
+        public static String getName(ChatFormatting format) {}
 
-        public static Formatting getFormat(String name) {}
+        public static ChatFormatting getFormatting(String name) {}
 
-        public static BossBar.Color byName(String name) {}
+        public static BossBarColor byName(String name) {}
 
-        public static BossBar.Color byFormat(Formatting format) {}
+        public static BossBarColor byFormatting(ChatFormatting format) {}
     }
 
-    public abstract class Styles {
-        public static BossBar.Style byName(String name) {}
+    public abstract class BossBarOverlays {
+        public static BossBarOverlay byName(String name) {}
     }
 }
 ```

@@ -1,0 +1,25 @@
+classTweaker v1 official
+
+transitive-accessible method net/minecraft/nbt/CompoundTag <init> (Ljava/util/Map;)V
+
+transitive-accessible method net/minecraft/nbt/ListTag <init> (Ljava/util/List;)V
+
+transitive-accessible method net/minecraft/network/chat/MutableComponent <init> (Lnet/minecraft/network/chat/ComponentContents;Ljava/util/List;Lnet/minecraft/network/chat/Style;)V
+
+transitive-inject-interface net/minecraft/server/bossevents/CustomBossEvents       net/hederamc/fishbonetrehalose/api/CustomBossEventsApi
+
+transitive-inject-interface net/minecraft/world/item/component/CustomData          net/hederamc/fishbonetrehalose/api/CustomDataApi
+
+transitive-inject-interface net/minecraft/world/entity/Entity                      net/hederamc/fishbonetrehalose/api/EntityApi
+
+transitive-inject-interface net/minecraft/world/item/Item                          net/hederamc/fishbonetrehalose/api/ItemApi
+
+transitive-inject-interface net/minecraft/world/item/enchantment/ItemEnchantments  net/hederamc/fishbonetrehalose/api/ItemEnchantmentsApi
+
+transitive-inject-interface net/minecraft/world/entity/LivingEntity                net/hederamc/fishbonetrehalose/api/LivingEntityApi
+
+transitive-inject-interface net/minecraft/network/chat/MutableComponent            net/hederamc/fishbonetrehalose/api/MutableComponentApi
+
+transitive-inject-interface net/minecraft/world/entity/player/Player               net/hederamc/fishbonetrehalose/api/PlayerApi
+
+transitive-inject-interface net/minecraft/world/scores/Scoreboard                  net/hederamc/fishbonetrehalose/api/ScoreboardApi

@@ -3,7 +3,7 @@
     "id": "fishbone-trehalose",
     "version": "${version}",
     "name": "Fishbone Trehalose",
-    "description": "Library mod provides only util methods in a manner which prioritises OOP.",
+    "description": "Interface injecting API providing more exposed functionality for composed object.",
     "authors": [
         {
             "name": "CookedSeafood",

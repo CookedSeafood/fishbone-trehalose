@@ -1,13 +1,19 @@
 # Fishbone Trehalose
 
-Fishbone Trehalose is a library mod provides only util methods in a manner which prioritises OOP.
+Fishbone Trehalose is a library addressing restrictions and inconvenient. Examples include:
+
+- Player riding.
+- Get or add something composed.
+- Query something composed by id/string.
+
+## Cheatsheet
 
 Things made player riding possible:
 
 - Redirect `EntityType.canSerialize()` in `Entity.addPassenger(Entity)` to a custom method which returns `true`.
 - Send `ClientboundSetPassengersPacket` to the vehicle player when mounting or dismounting.
 
-Other utils:
+Interface injections:
 
 ```java
 public class ItemEnchantments {

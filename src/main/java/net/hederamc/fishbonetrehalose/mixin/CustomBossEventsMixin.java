@@ -6,6 +6,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.bossevents.CustomBossEvent;
 import net.minecraft.server.bossevents.CustomBossEvents;
+import net.minecraft.util.RandomSource;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
@@ -15,10 +16,10 @@ public abstract class CustomBossEventsMixin implements CustomBossEventsApi {
     private Map<Identifier, CustomBossEvent> events;
 
     @Override
-    public CustomBossEvent getOrCreate(Identifier id, Component displayName) {
+    public CustomBossEvent getOrCreate(RandomSource random, Identifier id, Component displayName) {
         CustomBossEvent event = this.get(id);
         if (event == null) {
-            event = this.create(id, displayName);
+            event = this.create(random, id, displayName);
         }
 
         return event;
@@ -38,5 +39,5 @@ public abstract class CustomBossEventsMixin implements CustomBossEventsApi {
     public abstract CustomBossEvent get(Identifier id);
 
     @Shadow
-    public abstract CustomBossEvent create(Identifier id, Component displayName);
+    public abstract CustomBossEvent create(RandomSource random, Identifier id, Component displayName);
 }

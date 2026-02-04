@@ -93,6 +93,8 @@ public abstract class LivingEntity {
 }
 ```
 
+Utility classes:
+
 ```java
 public abstract class BossEvents {
     public abstract class BossBarColors {

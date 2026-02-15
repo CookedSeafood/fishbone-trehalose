@@ -8,9 +8,17 @@ import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(CustomData.class)
 public abstract class CustomDataMixin implements CustomDataApi {
+    @Shadow private CompoundTag tag;
+
+    @Override
+    public CompoundTag getTag() {
+        return this.tag;
+    }
+
     @Override
     public CustomData merge(CustomData other) {
-        return CustomData.of(this.copyTag().merge(other.copyTag()));
+        this.tag.merge(other.getTag());
+        return ((CustomData)(Object)this);
     }
 
     @Shadow

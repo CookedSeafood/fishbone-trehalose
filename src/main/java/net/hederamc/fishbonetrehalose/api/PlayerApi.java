@@ -4,6 +4,6 @@ import net.minecraft.world.scores.ScoreHolder;
 
 public interface PlayerApi {
     default ScoreHolder getScoreHolder() {
-        return null;
+        throw new UnsupportedOperationException();
     }
 }

@@ -10,18 +10,18 @@ import org.jetbrains.annotations.Nullable;
 
 public interface ScoreboardApi {
     default boolean containsObjective(String name) {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
     default Objective getOrAddObjective(String name, ObjectiveCriteria criterion, Component displayName, RenderType renderType, boolean displayAutoUpdate, @Nullable NumberFormat numberFormat) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     default boolean containsPlayerTeam(String name) {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
     default PlayerTeam getOrAddPlayerTeam(String name) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 }

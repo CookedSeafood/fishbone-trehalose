@@ -9,25 +9,26 @@ import net.minecraft.world.scores.ScoreHolder;
 
 public interface LivingEntityApi {
     default List<Entry<Holder<Enchantment>>> getEnchantments(ResourceKey<Enchantment> key) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     default List<Entry<Holder<Enchantment>>> getEnchantments() {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     default void setDead(boolean dead) {
+        throw new UnsupportedOperationException();
     }
 
     default float getYBodyRot(float partialTickTime) {
-        return 0.0f;
+        throw new UnsupportedOperationException();
     }
 
     default float getYHeadRot(float partialTickTime) {
-        return 0.0f;
+        throw new UnsupportedOperationException();
     }
 
     default ScoreHolder getScoreHolder() {
-        return null;
+        throw new UnsupportedOperationException();
     }
 }

@@ -4,22 +4,22 @@ import java.util.Set;
 
 public interface EntityApi {
     default double getX(float partialTickTime) {
-        return 0.0;
+        throw new UnsupportedOperationException();
     }
 
     default double getY(float partialTickTime) {
-        return 0.0;
+        throw new UnsupportedOperationException();
     }
 
     default double getZ(float partialTickTime) {
-        return 0.0;
+        throw new UnsupportedOperationException();
     }
 
     default Set<String> getTags() {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     default boolean hasTag(String commandTag) {
-        return false;
+        throw new UnsupportedOperationException();
     }
 }

@@ -6,10 +6,10 @@ import net.minecraft.world.item.Item;
 
 public interface ItemApi {
     default Identifier getId() {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     default Holder.Reference<Item> getRegistryHolder() {
-        return null;
+        throw new UnsupportedOperationException();
     }
 }

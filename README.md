@@ -59,6 +59,8 @@ public class CustomBossEvents {
 
 ```java
 public class CustomData {
+    public CompoundTag getTag() {}
+
     public CustomData merge(CustomData other) {}
 }
 ```

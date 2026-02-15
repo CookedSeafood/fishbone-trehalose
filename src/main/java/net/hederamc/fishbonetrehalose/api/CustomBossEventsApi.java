@@ -7,13 +7,14 @@ import net.minecraft.util.RandomSource;
 
 public interface CustomBossEventsApi {
     default CustomBossEvent getOrCreate(RandomSource random, Identifier id, Component displayName) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     default boolean containsKey(Identifier id) {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
     default void remove(Identifier id) {
+        throw new UnsupportedOperationException();
     }
 }

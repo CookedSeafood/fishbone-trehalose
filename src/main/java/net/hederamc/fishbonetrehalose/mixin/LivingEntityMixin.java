@@ -52,6 +52,11 @@ public abstract class LivingEntityMixin implements LivingEntityApi {
     }
 
     @Override
+    public boolean isDead() {
+        return this.dead;
+    }
+
+    @Override
     public void setDead(boolean dead) {
         this.dead = dead;
     }

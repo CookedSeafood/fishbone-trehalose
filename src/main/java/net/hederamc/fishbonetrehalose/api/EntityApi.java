@@ -1,6 +1,7 @@
 package net.hederamc.fishbonetrehalose.api;
 
 import java.util.Set;
+import net.minecraft.world.item.component.CustomData;
 
 public interface EntityApi {
     default double getX(float partialTickTime) {
@@ -19,7 +20,19 @@ public interface EntityApi {
         throw new UnsupportedOperationException();
     }
 
-    default boolean hasTag(String commandTag) {
+    default boolean hasTag(String tag) {
+        throw new UnsupportedOperationException();
+    }
+
+    default CustomData getCustomData() {
+        throw new UnsupportedOperationException();
+    }
+
+    default CustomData getOrCreateCustomData() {
+        throw new UnsupportedOperationException();
+    }
+
+    default void setCustomData(CustomData customData) {
         throw new UnsupportedOperationException();
     }
 }

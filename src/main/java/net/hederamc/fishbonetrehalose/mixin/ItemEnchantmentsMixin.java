@@ -22,8 +22,5 @@ public abstract class ItemEnchantmentsMixin implements ItemEnchantmentsApi {
     }
 
     @Shadow
-    public abstract int getLevel(Holder<Enchantment> enchantment);
-
-    @Shadow
     public abstract Set<Entry<Holder<Enchantment>>> entrySet();
 }

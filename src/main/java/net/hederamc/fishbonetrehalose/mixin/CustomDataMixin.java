@@ -20,7 +20,4 @@ public abstract class CustomDataMixin implements CustomDataApi {
         this.tag.merge(other.getTag());
         return ((CustomData)(Object)this);
     }
-
-    @Shadow
-    public abstract CompoundTag copyTag();
 }

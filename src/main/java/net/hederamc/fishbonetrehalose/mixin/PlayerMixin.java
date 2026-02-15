@@ -9,11 +9,10 @@ import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(Player.class)
 public abstract class PlayerMixin implements PlayerApi {
+    @Shadow private GameProfile gameProfile;
+
     @Override
     public ScoreHolder getScoreHolder() {
-        return ScoreHolder.fromGameProfile(this.getGameProfile());
+        return ScoreHolder.fromGameProfile(this.gameProfile);
     }
-
-    @Shadow
-    public abstract GameProfile getGameProfile();
 }

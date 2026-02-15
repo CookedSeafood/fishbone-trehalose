@@ -6,15 +6,19 @@ transitive-accessible method net/minecraft/nbt/ListTag <init> (Ljava/util/List;)
 
 transitive-accessible method net/minecraft/network/chat/MutableComponent <init> (Lnet/minecraft/network/chat/ComponentContents;Ljava/util/List;Lnet/minecraft/network/chat/Style;)V
 
+transitive-accessible method net/minecraft/world/item/component/CustomData <init> (Lnet/minecraft/nbt/CompoundTag;)V
+
 transitive-inject-interface net/minecraft/server/bossevents/CustomBossEvents       net/hederamc/fishbonetrehalose/api/CustomBossEventsApi
 
 transitive-inject-interface net/minecraft/world/item/component/CustomData          net/hederamc/fishbonetrehalose/api/CustomDataApi
 
 transitive-inject-interface net/minecraft/world/entity/Entity                      net/hederamc/fishbonetrehalose/api/EntityApi
 
+transitive-inject-interface net/minecraft/world/item/enchantment/ItemEnchantments  net/hederamc/fishbonetrehalose/api/ItemEnchantmentsApi
+
 transitive-inject-interface net/minecraft/world/item/Item                          net/hederamc/fishbonetrehalose/api/ItemApi
 
-transitive-inject-interface net/minecraft/world/item/enchantment/ItemEnchantments  net/hederamc/fishbonetrehalose/api/ItemEnchantmentsApi
+transitive-inject-interface net/minecraft/world/item/ItemStack                     net/hederamc/fishbonetrehalose/api/ItemStackApi
 
 transitive-inject-interface net/minecraft/world/entity/LivingEntity                net/hederamc/fishbonetrehalose/api/LivingEntityApi
 

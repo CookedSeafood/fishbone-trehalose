@@ -16,6 +16,10 @@ public interface LivingEntityApi {
         throw new UnsupportedOperationException();
     }
 
+    default boolean isDead() {
+        throw new UnsupportedOperationException();
+    }
+
     default void setDead(boolean dead) {
         throw new UnsupportedOperationException();
     }

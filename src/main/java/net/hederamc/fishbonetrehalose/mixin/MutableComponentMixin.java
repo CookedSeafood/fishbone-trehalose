@@ -12,24 +12,19 @@ import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(MutableComponent.class)
 public abstract class MutableComponentMixin implements MutableComponentApi {
+    @Shadow private ComponentContents contents;
+    @Shadow private List<Component> siblings;
+    @Shadow private Style style;
+
     @Override
     public Component deepCopy() {
         return new MutableComponent(
-            this.getContents(),
-            this.getSiblings().stream()
+            this.contents,
+            this.siblings.stream()
                 .map(MutableComponent.class::cast)
                 .map(mutableText -> mutableText.deepCopy())
                 .collect(Collectors.toList()),
-            this.getStyle()
+            this.style
         );
     }
-
-    @Shadow
-    public abstract ComponentContents getContents();
-
-    @Shadow
-    public abstract List<Component> getSiblings();
-
-    @Shadow
-    public abstract Style getStyle();
 }

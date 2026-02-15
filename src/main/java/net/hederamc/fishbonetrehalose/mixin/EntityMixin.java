@@ -2,11 +2,13 @@ package net.hederamc.fishbonetrehalose.mixin;
 
 import java.util.Set;
 import net.hederamc.fishbonetrehalose.api.EntityApi;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundSetPassengersPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.phys.Vec3;
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
@@ -23,6 +25,7 @@ public abstract class EntityMixin implements EntityApi{
     @Shadow private double zOld;
     @Shadow private Vec3 position;
     @Shadow private Set<String> tags;
+    @Shadow private CustomData customData;
 
     @Redirect(
         method = "startRiding(Lnet/minecraft/world/entity/Entity;ZZ)Z",
@@ -90,5 +93,24 @@ public abstract class EntityMixin implements EntityApi{
     @Override
     public boolean hasTag(String tag) {
         return this.tags.contains(tag);
+    }
+
+    @Override
+    public CustomData getCustomData() {
+        return this.customData;
+    }
+
+    @Override
+    public CustomData getOrCreateCustomData() {
+        if (this.customData == CustomData.EMPTY) {
+            this.customData = new CustomData(new CompoundTag());
+        }
+
+        return this.customData;
+    }
+
+    @Override
+    public void setCustomData(CustomData customData) {
+        this.customData = customData;
     }
 }

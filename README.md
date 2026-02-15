@@ -44,6 +44,22 @@ public abstract class Entity {
     public Set<String> getTags() {}
 
     public boolean hasTag(String tag) {}
+
+    public CustomData getCustomData() {}
+
+    public CustomData getOrCreateCustomData() {}
+
+    public void setCustomData(CustomData customData) {}
+}
+```
+
+```java
+public final class ItemStack {
+    public CustomData getCustomData() {}
+
+    public CustomData getOrCreateCustomData() {}
+
+    public void setCustomData(CustomData customData) {}
 }
 ```
 
@@ -67,9 +83,11 @@ public class CustomData {
 
 ```java
 public final class Item {
+    public Holder.Reference<Item> getRegistryHolder() {}
+
     public Identifier getId() {}
 
-    public Holder.Reference<Item> getRegistryHolder() {}
+    public DataComponentMap getComponents() {}
 }
 ```
 
@@ -84,6 +102,8 @@ public abstract class LivingEntity {
     public List<Entry<Holder<Enchantment>>> getEnchantments(ResourceKey<Enchantment> key) {}
 
     public List<Entry<Holder<Enchantment>>> getEnchantments() {}
+
+    public boolean isDead() {}
 
     public void setDead(boolean dead) {}
 

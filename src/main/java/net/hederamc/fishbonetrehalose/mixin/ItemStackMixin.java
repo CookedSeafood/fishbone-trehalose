@@ -1,33 +1,21 @@
 package net.hederamc.fishbonetrehalose.mixin;
 
-import net.hederamc.fishbonetrehalose.api.ItemStackApi;
+import net.hederamc.fishbonetrehalose.api.CustomDataHolder;
+import net.minecraft.core.component.DataComponentHolder;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.CustomData;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(ItemStack.class)
-public abstract class ItemStackMixin implements ItemStackApi {
+public abstract class ItemStackMixin implements CustomDataHolder, DataComponentHolder {
     @Nullable
     @Override
     public CustomData getCustomData() {
-        return ((ItemStack)(Object)this).get(DataComponents.CUSTOM_DATA);
-    }
-
-    @Override
-    public CustomData getOrCreateCustomData() {
-        CustomData customData = this.getCustomData();
-
-        if (customData == null) {
-            customData = new CustomData(new CompoundTag());
-            this.setCustomData(customData);
-        }
-
-        return customData;
+        return this.get(DataComponents.CUSTOM_DATA);
     }
 
     @Override

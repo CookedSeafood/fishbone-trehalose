@@ -1,7 +1,9 @@
 package net.hederamc.fishbonetrehalose.api;
 
-public interface ItemEnchantmentsApi {
-    default int getLevel(String enchantment) {
+import net.minecraft.resources.Identifier;
+
+public interface IdHolder {
+    default Identifier id() {
         throw new UnsupportedOperationException();
     }
 }

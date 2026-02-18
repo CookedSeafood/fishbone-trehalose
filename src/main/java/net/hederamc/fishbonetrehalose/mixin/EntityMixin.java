@@ -1,8 +1,9 @@
 package net.hederamc.fishbonetrehalose.mixin;
 
 import java.util.Set;
-import net.hederamc.fishbonetrehalose.api.EntityApi;
-import net.minecraft.nbt.CompoundTag;
+import net.hederamc.fishbonetrehalose.api.CustomDataHolder;
+import net.hederamc.fishbonetrehalose.api.PosHolder;
+import net.hederamc.fishbonetrehalose.api.TagsHolder;
 import net.minecraft.network.protocol.game.ClientboundSetPassengersPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
@@ -10,6 +11,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.phys.Vec3;
+import org.jspecify.annotations.Nullable;
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -19,10 +21,10 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Entity.class)
-public abstract class EntityMixin implements EntityApi{
-    @Shadow private double xOld;
-    @Shadow private double yOld;
-    @Shadow private double zOld;
+public abstract class EntityMixin implements PosHolder, TagsHolder, CustomDataHolder{
+    @Shadow private double xo;
+    @Shadow private double yo;
+    @Shadow private double zo;
     @Shadow private Vec3 position;
     @Shadow private Set<String> tags;
     @Shadow private CustomData customData;
@@ -72,21 +74,44 @@ public abstract class EntityMixin implements EntityApi{
 
     @Override
     public double getX(float partialTickTime) {
-        return Mth.lerp(partialTickTime, this.xOld, this.position.x);
+        return Mth.lerp(partialTickTime, this.xo, this.position.x);
     }
 
     @Override
     public double getY(float partialTickTime) {
-        return Mth.lerp(partialTickTime, this.yOld, this.position.y);
+        return Mth.lerp(partialTickTime, this.yo, this.position.y);
     }
 
     @Override
     public double getZ(float partialTickTime) {
-        return Mth.lerp(partialTickTime, this.zOld, this.position.z);
+        return Mth.lerp(partialTickTime, this.zo, this.position.z);
     }
 
     @Override
-    public Set<String> getTags() {
+    public Vec3 getPos(float partialTickTime) {
+        double x = Mth.lerp(partialTickTime, this.xo, this.position.x);
+        double y = Mth.lerp(partialTickTime, this.yo, this.position.y);
+        double z = Mth.lerp(partialTickTime, this.zo, this.position.z);
+        return new Vec3(x, y, z);
+    }
+
+    @Override
+    public void setX(double x) {
+        this.setPos(x, this.position.y, this.position.z);
+    }
+
+    @Override
+    public void setY(double y) {
+        this.setPos(this.position.x, y, this.position.z);
+    }
+
+    @Override
+    public void setZ(double z) {
+        this.setPos(this.position.x, this.position.y, z);
+    }
+
+    @Override
+    public Set<String> tags() {
         return this.tags;
     }
 
@@ -95,17 +120,14 @@ public abstract class EntityMixin implements EntityApi{
         return this.tags.contains(tag);
     }
 
+    @Nullable
     @Override
     public CustomData getCustomData() {
-        return this.customData;
+        return this.customData != CustomData.EMPTY ? this.customData : null;
     }
 
     @Override
-    public CustomData getOrCreateCustomData() {
-        if (this.customData == CustomData.EMPTY) {
-            this.customData = new CustomData(new CompoundTag());
-        }
-
+    public CustomData getCustomDataOrEmpty() {
         return this.customData;
     }
 

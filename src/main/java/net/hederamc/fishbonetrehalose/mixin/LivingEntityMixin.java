@@ -3,7 +3,9 @@ package net.hederamc.fishbonetrehalose.mixin;
 import it.unimi.dsi.fastutil.objects.Object2IntMap.Entry;
 import java.util.ArrayList;
 import java.util.List;
-import net.hederamc.fishbonetrehalose.api.LivingEntityApi;
+import net.hederamc.fishbonetrehalose.api.DeadHolder;
+import net.hederamc.fishbonetrehalose.api.EnchantmentsHolder;
+import net.hederamc.fishbonetrehalose.api.YBodyRotYHeadRotHolder;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.Mth;
@@ -12,17 +14,16 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
-import net.minecraft.world.scores.ScoreHolder;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(LivingEntity.class)
-public abstract class LivingEntityMixin implements LivingEntityApi {
-    @Shadow private boolean dead;
+public abstract class LivingEntityMixin implements EnchantmentsHolder, YBodyRotYHeadRotHolder, DeadHolder {
     @Shadow private float yBodyRot;
     @Shadow private float yBodyRotO;
     @Shadow private float yHeadRot;
     @Shadow private float yHeadRotO;
+    @Shadow private boolean dead;
 
     @Override
     public List<Entry<Holder<Enchantment>>> getEnchantments(ResourceKey<Enchantment> key) {
@@ -52,16 +53,6 @@ public abstract class LivingEntityMixin implements LivingEntityApi {
     }
 
     @Override
-    public boolean isDead() {
-        return this.dead;
-    }
-
-    @Override
-    public void setDead(boolean dead) {
-        this.dead = dead;
-    }
-
-    @Override
     public float getYBodyRot(float partialTickTime) {
         return Mth.lerp(partialTickTime, this.yBodyRotO, this.yBodyRot);
     }
@@ -72,8 +63,13 @@ public abstract class LivingEntityMixin implements LivingEntityApi {
     }
 
     @Override
-    public ScoreHolder getScoreHolder() {
-        return ScoreHolder.forNameOnly(((LivingEntity)(Object)this).getStringUUID());
+    public boolean isDead() {
+        return this.dead;
+    }
+
+    @Override
+    public void setDead(boolean dead) {
+        this.dead = dead;
     }
 
     @Shadow

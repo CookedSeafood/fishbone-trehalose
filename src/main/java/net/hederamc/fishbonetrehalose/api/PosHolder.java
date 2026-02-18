@@ -1,9 +1,8 @@
 package net.hederamc.fishbonetrehalose.api;
 
-import java.util.Set;
-import net.minecraft.world.item.component.CustomData;
+import net.minecraft.world.phys.Vec3;
 
-public interface EntityApi {
+public interface PosHolder {
     default double getX(float partialTickTime) {
         throw new UnsupportedOperationException();
     }
@@ -16,23 +15,27 @@ public interface EntityApi {
         throw new UnsupportedOperationException();
     }
 
-    default Set<String> getTags() {
+    default Vec3 getPos(float partialTickTime) {
         throw new UnsupportedOperationException();
     }
 
-    default boolean hasTag(String tag) {
+    default void setX(double x) {
         throw new UnsupportedOperationException();
     }
 
-    default CustomData getCustomData() {
+    default void setY(double y) {
         throw new UnsupportedOperationException();
     }
 
-    default CustomData getOrCreateCustomData() {
+    default void setZ(double z) {
         throw new UnsupportedOperationException();
     }
 
-    default void setCustomData(CustomData customData) {
+    default void setPos(Vec3 pos) {
+        throw new UnsupportedOperationException();
+    }
+
+    default void setPos(double x, double y, double z) {
         throw new UnsupportedOperationException();
     }
 }

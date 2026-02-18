@@ -1,37 +1,66 @@
 package net.hederamc.fishbonetrehalose.mixin;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
-import net.hederamc.fishbonetrehalose.api.ScoreboardApi;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.numbers.NumberFormat;
+import it.unimi.dsi.fastutil.objects.Reference2ObjectMap;
+import java.util.List;
+import java.util.Map;
+import net.hederamc.fishbonetrehalose.api.ObjectiveHolder;
+import net.hederamc.fishbonetrehalose.api.PlayerTeamHolder;
+import net.minecraft.world.scores.DisplaySlot;
 import net.minecraft.world.scores.Objective;
+import net.minecraft.world.scores.PlayerScores;
 import net.minecraft.world.scores.PlayerTeam;
 import net.minecraft.world.scores.Scoreboard;
 import net.minecraft.world.scores.criteria.ObjectiveCriteria;
-import net.minecraft.world.scores.criteria.ObjectiveCriteria.RenderType;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(Scoreboard.class)
-public abstract class ScoreboardMixin implements ScoreboardApi {
+public abstract class ScoreboardMixin implements ObjectiveHolder, PlayerTeamHolder {
     @Shadow private Object2ObjectMap<String, Objective> objectivesByName;
+    @Shadow private Reference2ObjectMap<ObjectiveCriteria, List<Objective>> objectivesByCriteria;
+    @Shadow private Map<String, PlayerScores> playerScores;
     @Shadow private Object2ObjectMap<String, PlayerTeam> teamsByName;
+    @Shadow private Object2ObjectMap<String, PlayerTeam> teamsByPlayer;
 
     @Override
     public boolean containsObjective(String name) {
         return this.objectivesByName.containsKey(name);
     }
 
+    @Nullable
     @Override
-    public Objective getOrAddObjective(String name, ObjectiveCriteria criterion, Component displayName,
-            RenderType renderType, boolean displayAutoUpdate, @Nullable NumberFormat numberFormat) {
-        Objective objective = this.getObjective(name);
+    public Objective removeObjective(String name) {
+        Objective objective = this.objectivesByName.remove(name);
+
         if (objective == null) {
-            objective = this.addObjective(name, criterion, displayName, renderType, displayAutoUpdate, numberFormat);
+            return null;
         }
 
+        for (DisplaySlot value : DisplaySlot.values()) {
+            if (this.getDisplayObjective(value) == objective) {
+                this.setDisplayObjective(value, null);
+            }
+        }
+
+        List<Objective> objectives = this.getObjectives(objective.getCriteria());
+
+        if (objectives != null) {
+            objectives.remove(objective);
+        }
+
+        for (PlayerScores playerScore : this.playerScores.values()) {
+            playerScore.remove(objective);
+        }
+
+        this.onObjectiveRemoved(objective);
         return objective;
+    }
+
+    @Override
+    public List<Objective> getObjectives(ObjectiveCriteria criteria) {
+        return this.objectivesByCriteria.get(criteria);
     }
 
     @Override
@@ -39,28 +68,36 @@ public abstract class ScoreboardMixin implements ScoreboardApi {
         return this.teamsByName.containsKey(name);
     }
 
+    @Nullable
     @Override
-    public PlayerTeam getOrAddPlayerTeam(String name) {
-        PlayerTeam team = this.getPlayerTeam(name);
+    public PlayerTeam removePlayerTeam(String name) {
+        PlayerTeam team = this.teamsByName.remove(name);
+
         if (team == null) {
-            team = this.addPlayerTeam(name);
+            return null;
         }
 
+        for (String player : team.getPlayers()) {
+            this.removePlayerFromTeam(player, team);
+        }
+
+        this.onTeamRemoved(team);
         return team;
     }
 
     @Nullable
     @Shadow
-    public abstract Objective getObjective(@Nullable String name);
+    public abstract Objective getDisplayObjective(DisplaySlot slot);
 
     @Shadow
-    public abstract Objective addObjective(String name, ObjectiveCriteria criteria, Component displayName,
-            RenderType renderType, boolean displayAutoUpdate, @Nullable NumberFormat numberFormat);
-
-    @Nullable
-    @Shadow
-    public abstract PlayerTeam getPlayerTeam(String name);
+    public abstract void setDisplayObjective(DisplaySlot slot, @Nullable Objective objective);
 
     @Shadow
-    public abstract PlayerTeam addPlayerTeam(String name);
+    public abstract void removePlayerFromTeam(String player, PlayerTeam team);
+
+    @Shadow
+    public abstract void onObjectiveRemoved(Objective objective);
+
+    @Shadow
+    public abstract void onTeamRemoved(PlayerTeam team);
 }

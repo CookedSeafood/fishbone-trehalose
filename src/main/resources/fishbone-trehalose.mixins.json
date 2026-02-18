@@ -6,12 +6,11 @@
         "CustomBossEventsMixin",
         "CustomDataMixin",
         "EntityMixin",
-        "ItemEnchantmentsMixin",
         "ItemMixin",
         "ItemStackMixin",
         "LivingEntityMixin",
         "MutableComponentMixin",
-        "PlayerMixin",
+        "ReferenceMixin",
         "ScoreboardMixin"
     ],
     "injectors": {

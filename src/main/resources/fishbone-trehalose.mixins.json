@@ -6,6 +6,7 @@
         "CustomBossEventsMixin",
         "CustomDataMixin",
         "EntityMixin",
+        "EntityTypeMixin",
         "ItemMixin",
         "ItemStackMixin",
         "LivingEntityMixin",

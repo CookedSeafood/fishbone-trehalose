@@ -16,11 +16,17 @@ transitive-inject-interface  net/minecraft/world/item/component/CustomData      
 
 transitive-inject-interface  net/minecraft/world/item/component/CustomData          net/hederamc/fishbonetrehalose/api/CustomDataApi
 
+transitive-inject-interface  net/minecraft/world/entity/Entity                      net/hederamc/fishbonetrehalose/api/EntityTypeHolder
+
+transitive-inject-interface  net/minecraft/world/entity/Entity                      net/hederamc/fishbonetrehalose/api/NetworkIdHolder
+
 transitive-inject-interface  net/minecraft/world/entity/Entity                      net/hederamc/fishbonetrehalose/api/PosHolder
 
 transitive-inject-interface  net/minecraft/world/entity/Entity                      net/hederamc/fishbonetrehalose/api/TagsHolder
 
 transitive-inject-interface  net/minecraft/world/entity/Entity                      net/hederamc/fishbonetrehalose/api/CustomDataHolder
+
+transitive-inject-interface  net/minecraft/world/entity/EntityType                  net/hederamc/fishbonetrehalose/api/IdHolder
 
 transitive-inject-interface  net/minecraft/world/item/Item                          net/hederamc/fishbonetrehalose/api/IdHolder
 

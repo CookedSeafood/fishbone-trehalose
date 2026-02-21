@@ -2,6 +2,8 @@ package net.hederamc.fishbonetrehalose.mixin;
 
 import java.util.Set;
 import net.hederamc.fishbonetrehalose.api.CustomDataHolder;
+import net.hederamc.fishbonetrehalose.api.EntityTypeHolder;
+import net.hederamc.fishbonetrehalose.api.NetworkIdHolder;
 import net.hederamc.fishbonetrehalose.api.PosHolder;
 import net.hederamc.fishbonetrehalose.api.TagsHolder;
 import net.minecraft.network.protocol.game.ClientboundSetPassengersPacket;
@@ -21,7 +23,9 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Entity.class)
-public abstract class EntityMixin implements PosHolder, TagsHolder, CustomDataHolder{
+public abstract class EntityMixin implements EntityTypeHolder, NetworkIdHolder, PosHolder, TagsHolder, CustomDataHolder{
+    @Shadow private EntityType<?> type;
+    @Shadow private int id;
     @Shadow private double xo;
     @Shadow private double yo;
     @Shadow private double zo;
@@ -70,6 +74,21 @@ public abstract class EntityMixin implements PosHolder, TagsHolder, CustomDataHo
         if (entity instanceof ServerPlayer) {
             ((ServerPlayer)entity).connection.send(new ClientboundSetPassengersPacket(entity));
         }
+    }
+
+    @Override
+    public EntityType<?> type() {
+        return this.type;
+    }
+
+    @Override
+    public int getNetworkId() {
+        return this.id;
+    }
+
+    @Override
+    public void setNetworkId(int id) {
+        this.id = id;
     }
 
     @Override

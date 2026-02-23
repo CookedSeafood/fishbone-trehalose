@@ -32,6 +32,8 @@ transitive-inject-interface  net/minecraft/world/entity/EntityType              
 
 transitive-inject-interface  net/minecraft/world/item/Item                          net/hederamc/fishbonetrehalose/api/IdHolder
 
+transitive-inject-interface  net/minecraft/world/item/ItemStack                     net/hederamc/fishbonetrehalose/api/RarityHolder
+
 transitive-inject-interface  net/minecraft/world/item/ItemStack                     net/hederamc/fishbonetrehalose/api/CustomDataHolder
 
 transitive-inject-interface  net/minecraft/world/entity/LivingEntity                net/hederamc/fishbonetrehalose/api/EnchantmentsHolder

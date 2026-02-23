@@ -11,8 +11,10 @@
         "ItemStackMixin",
         "LivingEntityMixin",
         "MutableComponentMixin",
+        "PlayerMixin",
         "ReferenceMixin",
-        "ScoreboardMixin"
+        "ScoreboardMixin",
+        "ServerPlayerMixin"
     ],
     "injectors": {
         "defaultRequire": 1

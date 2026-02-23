@@ -40,6 +40,8 @@ transitive-inject-interface  net/minecraft/world/entity/LivingEntity            
 
 transitive-inject-interface  net/minecraft/network/chat/MutableComponent            net/hederamc/fishbonetrehalose/api/MutableComponentApi
 
+transitive-inject-interface  net/minecraft/world/entity/player/Player               net/hederamc/fishbonetrehalose/api/ExperienceHolder
+
 transitive-inject-interface  net/minecraft/core/Holder$Reference                    net/hederamc/fishbonetrehalose/api/IdHolder
 
 transitive-inject-interface  net/minecraft/world/scores/Scoreboard                  net/hederamc/fishbonetrehalose/api/ObjectiveHolder

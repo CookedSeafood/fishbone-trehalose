@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.Shadow;
 @Mixin(Reference.class)
 public abstract class ReferenceMixin<T> implements IdHolder {
     @Override
-    public Identifier id() {
+    public Identifier getId() {
         return this.key().identifier();
     }
 

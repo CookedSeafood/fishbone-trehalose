@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.Mixin;
 @Mixin(EntityType.class)
 public abstract class EntityTypeMixin implements IdHolder {
     @Override
-    public Identifier id() {
+    public Identifier getId() {
         return BuiltInRegistries.ENTITY_TYPE.getKey(((EntityType<?>)(Object)this));
     }
 }

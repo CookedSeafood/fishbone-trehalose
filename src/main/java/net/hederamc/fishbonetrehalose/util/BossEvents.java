@@ -4,6 +4,7 @@ import java.util.Arrays;
 import net.minecraft.ChatFormatting;
 import net.minecraft.world.BossEvent.BossBarColor;
 import net.minecraft.world.BossEvent.BossBarOverlay;
+import org.jspecify.annotations.Nullable;
 
 public final class BossEvents {
     private BossEvents() {
@@ -13,34 +14,20 @@ public final class BossEvents {
         private BossBarColors() {
         }
 
-        public static String getName(ChatFormatting format) {
-            return Arrays.stream(BossBarColor.values())
-                    .filter(color -> color.getFormatting().equals(format))
-                    .map(color -> color.getName())
-                    .findAny()
-                    .orElse("");
-        }
-
-        public static ChatFormatting getFormatting(String name) {
-            return Arrays.stream(BossBarColor.values())
-                    .filter(color -> color.getName().equals(name))
-                    .map(color -> color.getFormatting())
-                    .findAny()
-                    .orElse(ChatFormatting.RESET);
-        }
-
+        @Nullable
         public static BossBarColor byName(String name) {
             return Arrays.stream(BossBarColor.values())
                     .filter(color -> color.getName().equals(name))
                     .findAny()
-                    .get();
+                    .orElse(null);
         }
 
-        public static BossBarColor byFormatting(ChatFormatting format) {
+        @Nullable
+        public static BossBarColor byFormatting(ChatFormatting formatting) {
             return Arrays.stream(BossBarColor.values())
-                    .filter(color -> color.getFormatting().equals(format))
+                    .filter(color -> color.getFormatting().equals(formatting))
                     .findAny()
-                    .get();
+                    .orElse(null);
         }
     }
 
@@ -48,11 +35,12 @@ public final class BossEvents {
         private BossBarOverlays() {
         }
 
+        @Nullable
         public static BossBarOverlay byName(String name) {
             return Arrays.stream(BossBarOverlay.values())
                     .filter(style -> style.getName().equals(name))
                     .findAny()
-                    .get();
+                    .orElse(null);
         }
     }
 }

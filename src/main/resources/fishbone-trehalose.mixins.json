@@ -3,6 +3,7 @@
     "package": "net.hederamc.fishbonetrehalose.mixin",
     "compatibilityLevel": "JAVA_25",
     "mixins": [
+        "BossBarColorMixin",
         "CustomBossEventsMixin",
         "CustomDataMixin",
         "EntityMixin",
@@ -12,6 +13,7 @@
         "LivingEntityMixin",
         "MutableComponentMixin",
         "PlayerMixin",
+        "RarityMixin",
         "ReferenceMixin",
         "ScoreboardMixin",
         "ServerPlayerMixin"

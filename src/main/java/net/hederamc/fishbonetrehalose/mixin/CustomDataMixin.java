@@ -12,13 +12,13 @@ public abstract class CustomDataMixin implements CompoundTagHolder, CustomDataAp
     @Shadow private CompoundTag tag;
 
     @Override
-    public CompoundTag tag() {
+    public CompoundTag getTag() {
         return this.tag;
     }
 
     @Override
     public CustomData merge(CustomData other) {
-        this.tag.merge(other.tag());
+        this.tag.merge(other.getTag());
         return ((CustomData)(Object)this);
     }
 }

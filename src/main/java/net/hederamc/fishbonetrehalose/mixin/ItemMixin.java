@@ -12,7 +12,7 @@ public abstract class ItemMixin implements IdHolder {
     @Shadow private Reference<Item> builtInRegistryHolder;
 
     @Override
-    public Identifier id() {
-        return this.builtInRegistryHolder.id();
+    public Identifier getId() {
+        return this.builtInRegistryHolder.getId();
     }
 }

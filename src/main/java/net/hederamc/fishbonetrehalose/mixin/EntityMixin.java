@@ -77,7 +77,7 @@ public abstract class EntityMixin implements EntityTypeHolder, NetworkIdHolder, 
     }
 
     @Override
-    public EntityType<?> type() {
+    public EntityType<?> getType() {
         return this.type;
     }
 
@@ -130,7 +130,7 @@ public abstract class EntityMixin implements EntityTypeHolder, NetworkIdHolder, 
     }
 
     @Override
-    public Set<String> tags() {
+    public Set<String> getTags() {
         return this.tags;
     }
 

@@ -10,6 +10,8 @@ transitive-accessible method net/minecraft/network/chat/MutableComponent <init> 
 
 transitive-accessible method net/minecraft/world/item/component/CustomData <init> (Lnet/minecraft/nbt/CompoundTag;)V
 
+transitive-inject-interface  net/minecraft/world/BossEvent$BossBarColor             net/hederamc/fishbonetrehalose/api/ChatFormattingHolder
+
 transitive-inject-interface  net/minecraft/server/bossevents/CustomBossEvents       net/hederamc/fishbonetrehalose/api/CustomBossEventHolder
 
 transitive-inject-interface  net/minecraft/world/item/component/CustomData          net/hederamc/fishbonetrehalose/api/CompoundTagHolder
@@ -41,6 +43,10 @@ transitive-inject-interface  net/minecraft/world/entity/LivingEntity            
 transitive-inject-interface  net/minecraft/network/chat/MutableComponent            net/hederamc/fishbonetrehalose/api/MutableComponentApi
 
 transitive-inject-interface  net/minecraft/world/entity/player/Player               net/hederamc/fishbonetrehalose/api/ExperienceHolder
+
+transitive-inject-interface  net/minecraft/world/item/Rarity                        net/hederamc/fishbonetrehalose/api/NetworkIdHolder
+
+transitive-inject-interface  net/minecraft/world/item/Rarity                        net/hederamc/fishbonetrehalose/api/ChatFormattingHolder
 
 transitive-inject-interface  net/minecraft/core/Holder$Reference                    net/hederamc/fishbonetrehalose/api/IdHolder
 

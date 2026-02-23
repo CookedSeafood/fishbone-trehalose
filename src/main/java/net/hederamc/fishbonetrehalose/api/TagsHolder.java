@@ -3,7 +3,7 @@ package net.hederamc.fishbonetrehalose.api;
 import java.util.Set;
 
 public interface TagsHolder {
-    default Set<String> tags() {
+    default Set<String> getTags() {
         throw new UnsupportedOperationException();
     }
 

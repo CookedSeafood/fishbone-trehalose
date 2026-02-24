@@ -18,21 +18,13 @@ public interface ObjectiveHolder {
         throw new UnsupportedOperationException();
     }
 
-    default Objective addObjective(String name, ObjectiveCriteria criteria, Component displayName,
+    default boolean addObjective(String name, ObjectiveCriteria criteria, Component displayName,
             RenderType renderType, boolean displayAutoUpdate, @Nullable NumberFormat numberFormat) {
         throw new UnsupportedOperationException();
     }
 
-    default Objective getOrAddObjective(String name, ObjectiveCriteria criteria, Component displayName,
-            RenderType renderType, boolean displayAutoUpdate, @Nullable NumberFormat numberFormat) {
-        Objective objective = this.getObjective(name);
-
-        if (objective == null) {
-            objective = this.addObjective(name, criteria, displayName,
-                    renderType, displayAutoUpdate, numberFormat);
-        }
-
-        return objective;
+    default boolean addObjective(Objective objective) {
+        throw new UnsupportedOperationException();
     }
 
     @Nullable
@@ -41,6 +33,11 @@ public interface ObjectiveHolder {
     }
 
     default void removeObjective(Objective objective) {
+        throw new UnsupportedOperationException();
+    }
+
+    default Objective getOrAddObjective(String name, ObjectiveCriteria criteria, Component displayName,
+            RenderType renderType, boolean displayAutoUpdate, @Nullable NumberFormat numberFormat) {
         throw new UnsupportedOperationException();
     }
 

@@ -7,10 +7,16 @@ import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(Player.class)
 public abstract class PlayerMixin implements ExperienceHolder {
+    @Shadow public int experienceLevel;
     @Shadow public int totalExperience;
 
     @Override
     public int getExperience() {
         return this.totalExperience;
+    }
+
+    @Override
+    public int getExperienceLevel() {
+        return this.experienceLevel;
     }
 }

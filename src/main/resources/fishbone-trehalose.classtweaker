@@ -28,6 +28,8 @@ transitive-inject-interface  net/minecraft/world/entity/Entity                  
 
 transitive-inject-interface  net/minecraft/world/entity/Entity                      net/hederamc/fishbonetrehalose/api/CustomDataHolder
 
+transitive-inject-interface  net/minecraft/world/entity/Entity                      net/hederamc/fishbonetrehalose/api/EntityApi
+
 transitive-inject-interface  net/minecraft/world/entity/EntityType                  net/hederamc/fishbonetrehalose/api/IdHolder
 
 transitive-inject-interface  net/minecraft/world/item/Item                          net/hederamc/fishbonetrehalose/api/IdHolder
@@ -54,4 +56,4 @@ transitive-inject-interface  net/minecraft/core/Holder$Reference                
 
 transitive-inject-interface  net/minecraft/world/scores/Scoreboard                  net/hederamc/fishbonetrehalose/api/ObjectiveHolder
 
-transitive-inject-interface  net/minecraft/world/scores/Scoreboard                  net/hederamc/fishbonetrehalose/api/PlayerTeamHolder
+transitive-inject-interface  net/minecraft/world/scores/Scoreboard                  net/hederamc/fishbonetrehalose/api/ServerTeamHolder

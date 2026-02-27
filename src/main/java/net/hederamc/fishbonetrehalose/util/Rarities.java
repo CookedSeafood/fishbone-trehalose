@@ -1,6 +1,5 @@
 package net.hederamc.fishbonetrehalose.util;
 
-import java.util.Arrays;
 import net.minecraft.ChatFormatting;
 import net.minecraft.world.item.Rarity;
 import org.jspecify.annotations.Nullable;
@@ -11,17 +10,23 @@ public final class Rarities {
 
     @Nullable
     public static Rarity byName(String name) {
-        return Arrays.stream(Rarity.values())
-                .filter(rarity -> rarity.getSerializedName().equals(name))
-                .findAny()
-                .orElse(null);
+        for (Rarity rarity : Rarity.values()) {
+            if (rarity.getSerializedName().equals(name)) {
+                return rarity;
+            }
+        }
+
+        return null;
     }
 
     @Nullable
     public static Rarity byFormatting(ChatFormatting formatting) {
-        return Arrays.stream(Rarity.values())
-                .filter(rarity -> rarity.getFormatting().equals(formatting))
-                .findAny()
-                .orElse(null);
+        for (Rarity rarity : Rarity.values()) {
+            if (rarity.getFormatting().equals(formatting)) {
+                return rarity;
+            }
+        }
+
+        return null;
     }
 }

@@ -41,7 +41,6 @@
         "java": ">=25",
         "fabric-api": "*"
     },
-    "suggests": {},
     "custom": {
         "modmenu": {
             "badges": [

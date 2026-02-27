@@ -1,6 +1,5 @@
 package net.hederamc.fishbonetrehalose.util;
 
-import java.util.Arrays;
 import net.minecraft.ChatFormatting;
 import net.minecraft.world.BossEvent.BossBarColor;
 import net.minecraft.world.BossEvent.BossBarOverlay;
@@ -16,18 +15,24 @@ public final class BossEvents {
 
         @Nullable
         public static BossBarColor byName(String name) {
-            return Arrays.stream(BossBarColor.values())
-                    .filter(color -> color.getName().equals(name))
-                    .findAny()
-                    .orElse(null);
+            for (BossBarColor color : BossBarColor.values()) {
+                if (color.getName().equals(name)) {
+                    return color;
+                }
+            }
+
+            return null;
         }
 
         @Nullable
         public static BossBarColor byFormatting(ChatFormatting formatting) {
-            return Arrays.stream(BossBarColor.values())
-                    .filter(color -> color.getFormatting().equals(formatting))
-                    .findAny()
-                    .orElse(null);
+            for (BossBarColor color : BossBarColor.values()) {
+                if (color.getFormatting().equals(formatting)) {
+                    return color;
+                }
+            }
+
+            return null;
         }
     }
 
@@ -37,10 +42,13 @@ public final class BossEvents {
 
         @Nullable
         public static BossBarOverlay byName(String name) {
-            return Arrays.stream(BossBarOverlay.values())
-                    .filter(style -> style.getName().equals(name))
-                    .findAny()
-                    .orElse(null);
+            for (BossBarOverlay overlay : BossBarOverlay.values()) {
+                if (overlay.getName().equals(name)) {
+                    return overlay;
+                }
+            }
+
+            return null;
         }
     }
 }

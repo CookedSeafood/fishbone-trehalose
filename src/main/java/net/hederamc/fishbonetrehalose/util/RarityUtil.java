@@ -4,8 +4,8 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.world.item.Rarity;
 import org.jspecify.annotations.Nullable;
 
-public final class Rarities {
-    private Rarities() {
+public final class RarityUtil {
+    private RarityUtil() {
     }
 
     @Nullable

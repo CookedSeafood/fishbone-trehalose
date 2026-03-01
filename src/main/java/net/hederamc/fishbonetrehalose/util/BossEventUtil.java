@@ -5,12 +5,12 @@ import net.minecraft.world.BossEvent.BossBarColor;
 import net.minecraft.world.BossEvent.BossBarOverlay;
 import org.jspecify.annotations.Nullable;
 
-public final class BossEvents {
-    private BossEvents() {
+public final class BossEventUtil {
+    private BossEventUtil() {
     }
 
-    public final class BossBarColors {
-        private BossBarColors() {
+    public final class BossBarColorUtil {
+        private BossBarColorUtil() {
         }
 
         @Nullable
@@ -36,8 +36,8 @@ public final class BossEvents {
         }
     }
 
-    public final class BossBarOverlays {
-        private BossBarOverlays() {
+    public final class BossBarOverlayUtil {
+        private BossBarOverlayUtil() {
         }
 
         @Nullable

@@ -44,7 +44,9 @@ transitive-inject-interface  net/minecraft/world/entity/LivingEntity            
 
 transitive-inject-interface  net/minecraft/world/entity/LivingEntity                net/hederamc/fishbonetrehalose/api/DeadHolder
 
-transitive-inject-interface  net/minecraft/network/chat/MutableComponent            net/hederamc/fishbonetrehalose/api/MutableComponentApi
+transitive-inject-interface  net/minecraft/network/chat/MutableComponent            net/hederamc/fishbonetrehalose/api/Text
+
+transitive-inject-interface  net/minecraft/network/chat/MutableComponent            net/hederamc/fishbonetrehalose/api/TextList
 
 transitive-inject-interface  net/minecraft/world/entity/player/Player               net/hederamc/fishbonetrehalose/api/ExperienceHolder
 

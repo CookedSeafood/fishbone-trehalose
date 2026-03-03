@@ -28,6 +28,10 @@ public interface Text extends Message, FormattedText {
         return FormattedText.super.getString();
     }
 
+    default TextList toTextList() {
+        return TextList.fromEmpty().append(this);
+    }
+
     default ComponentContents getContents() {
         throw new UnsupportedOperationException();
     }
@@ -69,11 +73,11 @@ public interface Text extends Message, FormattedText {
                 : this.getContents().equals(text.getContents()) && this.getStyle().equals(text.getStyle());
     }
 
-    default <T extends Text> T copy() {
+    default Text copy() {
         throw new UnsupportedOperationException();
     }
 
-    default <T extends Text> T deepCopy() {
+    default Text deepCopy() {
         throw new UnsupportedOperationException();
     }
 

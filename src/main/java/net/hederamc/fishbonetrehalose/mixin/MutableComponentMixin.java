@@ -3,6 +3,7 @@ package net.hederamc.fishbonetrehalose.mixin;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 import net.hederamc.fishbonetrehalose.api.Text;
 import net.hederamc.fishbonetrehalose.api.TextList;
@@ -46,13 +47,11 @@ public abstract class MutableComponentMixin implements Component, Text, TextList
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public MutableComponent copy() {
         return new MutableComponent(this.contents, new ArrayList<>(this.siblings), this.style);
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public MutableComponent deepCopy() {
         return new MutableComponent(
                 this.contents,
@@ -82,6 +81,14 @@ public abstract class MutableComponentMixin implements Component, Text, TextList
     @Override
     @Shadow
     public abstract Style getStyle();
+
+    @Override
+    @Shadow
+    public abstract MutableComponent withStyle(Style style);
+
+    @Override
+    @Shadow
+    public abstract MutableComponent withStyle(UnaryOperator<Style> updater);
 
     @Override
     @Shadow

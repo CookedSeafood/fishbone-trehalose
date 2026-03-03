@@ -5,6 +5,7 @@ import com.mojang.datafixers.util.Either;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import net.minecraft.commands.arguments.NbtPathArgument.NbtPath;
@@ -35,6 +36,11 @@ public final class MutableComponentUtil {
 
     public static MutableComponent fromContents(ComponentContents contents) {
         return new MutableComponent(contents, new ArrayList<>(), Style.EMPTY);
+    }
+
+    @SuppressWarnings("unchecked")
+    public static MutableComponent fromList(List<? super MutableComponent> list) {
+        return new MutableComponent(PlainTextContents.EMPTY, (List<Component>) (List<?>) list, Style.EMPTY);
     }
 
     public static MutableComponent fromEmpty() {
@@ -89,7 +95,8 @@ public final class MutableComponentUtil {
         return fromContents(new ScoreContents(Either.right(name), objective));
     }
 
-    public static MutableComponent fromSelector(CompilableString<EntitySelector> pattern, Optional<Component> separator) {
+    public static MutableComponent fromSelector(CompilableString<EntitySelector> pattern,
+            Optional<Component> separator) {
         return fromContents(new SelectorContents(pattern, separator));
     }
 

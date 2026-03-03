@@ -3,6 +3,7 @@ package net.hederamc.fishbonetrehalose.api;
 import com.mojang.brigadier.Message;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.UnaryOperator;
 import net.hederamc.fishbonetrehalose.util.MutableComponentUtil;
 import net.minecraft.network.chat.FormattedText;
 import net.minecraft.network.chat.MutableComponent;
@@ -15,8 +16,9 @@ public interface TextList extends Message, FormattedText {
         return FormattedText.super.getString();
     }
 
-    default List<Text> getTexts() {
-        throw new UnsupportedOperationException();
+    default Text toText() {
+        return this.isEmpty() ? Text.fromEmpty()
+                : ((Text) Text.fromString(this.getString())).withStyle(this.getFirstStyle());
     }
 
     default TextList append(String string) {
@@ -24,12 +26,55 @@ public interface TextList extends Message, FormattedText {
     }
 
     default TextList append(Text text) {
-        this.getTexts().add(text);
+        this.add(text);
+        return this;
+    }
+
+    default Style getFirstStyle() {
+        return this.getTexts().getFirst().getStyle();
+    }
+
+    default void setStyle(Style style) {
+        for (Text text : this.getTexts()) {
+            text.setStyle(style);
+        }
+    }
+
+    default TextList withStyle(Style style) {
+        this.setStyle(style);
+        return this;
+    }
+
+    default TextList withStyle(UnaryOperator<Style> updater) {
+        for (Text text : this.getTexts()) {
+            text.setStyle(updater.apply(text.getStyle()));
+        }
+
         return this;
     }
 
     default FormattedCharSequence getVisualOrderText() {
         throw new UnsupportedOperationException();
+    }
+
+    default List<Text> getTexts() {
+        throw new UnsupportedOperationException();
+    }
+
+    default int size() {
+        return this.getTexts().size();
+    }
+
+    default boolean isEmpty() {
+        return this.getTexts().isEmpty();
+    }
+
+    default boolean add(Text text) {
+        return this.getTexts().add(text);
+    }
+
+    default void clear() {
+        this.getTexts().clear();
     }
 
     @Override
@@ -60,11 +105,11 @@ public interface TextList extends Message, FormattedText {
         return this == list ? true : this.getTexts().equals(list.getTexts());
     }
 
-    default <T extends TextList> T copy() {
+    default TextList copy() {
         throw new UnsupportedOperationException();
     }
 
-    default <T extends TextList> T deepCopy() {
+    default TextList deepCopy() {
         throw new UnsupportedOperationException();
     }
 
@@ -72,5 +117,9 @@ public interface TextList extends Message, FormattedText {
 
     static MutableComponent fromEmpty() {
         return MutableComponentUtil.fromEmpty();
+    }
+
+    static MutableComponent fromList(List<Text> list) {
+        return MutableComponentUtil.fromList(list);
     }
 }

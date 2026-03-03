@@ -29,6 +29,10 @@ public final class MutableComponentUtil {
     private MutableComponentUtil() {
     }
 
+    public static MutableComponent literal(String string) {
+        return fromString(string);
+    }
+
     public static MutableComponent fromContents(ComponentContents contents) {
         return new MutableComponent(contents, new ArrayList<>(), Style.EMPTY);
     }

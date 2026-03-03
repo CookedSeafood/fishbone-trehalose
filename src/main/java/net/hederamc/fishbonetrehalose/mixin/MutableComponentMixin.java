@@ -23,19 +23,32 @@ public abstract class MutableComponentMixin implements Component, Text, TextList
     @Shadow private FormattedCharSequence visualOrderText;
     @Shadow private Language decomposedWith;
 
-    // Text ----------------------------------------------------------------------
+    // Text
 
     @Override
     public void setStyle(Style style) {
         this.style = style;
     }
 
-    // TextList ------------------------------------------------------------------
+    // TextList
 
     @Override
     @SuppressWarnings("unchecked")
     public List<Text> getTexts() {
         return (List<Text>) (List<?>) this.siblings;
+    }
+
+    // General
+
+    @Override
+    public String getString() {
+        return Component.super.getString();
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public MutableComponent copy() {
+        return new MutableComponent(this.contents, new ArrayList<>(this.siblings), this.style);
     }
 
     @Override
@@ -50,14 +63,6 @@ public abstract class MutableComponentMixin implements Component, Text, TextList
                         .map(MutableComponent.class::cast)
                         .collect(Collectors.toList()),
                 this.style);
-    }
-
-    // General -------------------------------------------------------------------
-
-    @Override
-    @SuppressWarnings("unchecked")
-    public MutableComponent copy() {
-        return new MutableComponent(this.contents, new ArrayList<>(this.siblings), this.style);
     }
 
     @Override

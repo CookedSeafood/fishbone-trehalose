@@ -3,6 +3,7 @@ package net.hederamc.fishbonetrehalose.api;
 import com.mojang.brigadier.Message;
 import java.net.URI;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.function.UnaryOperator;
@@ -28,12 +29,21 @@ public interface Text extends Message, FormattedText {
         return FormattedText.super.getString();
     }
 
-    default TextList toTextList() {
-        return TextList.fromEmpty().append(this);
-    }
-
     default ComponentContents getContents() {
         throw new UnsupportedOperationException();
+    }
+
+    default List<Text> getTexts() {
+        throw new UnsupportedOperationException();
+    }
+
+    default Text append(String string) {
+        return string.isEmpty() ? this : this.append(fromString(string));
+    }
+
+    default Text append(Text text) {
+        this.getTexts().add(text);
+        return this;
     }
 
     default Style getStyle() {
@@ -57,20 +67,11 @@ public interface Text extends Message, FormattedText {
         throw new UnsupportedOperationException();
     }
 
-    @Override
-    default <T> Optional<T> visit(ContentConsumer<T> output) {
-        return this.getContents().visit(output);
-    }
-
-    @Override
-    default <T> Optional<T> visit(StyledContentConsumer<T> output, Style parentStyle) {
-        Style selfStyle = this.getStyle().applyTo(parentStyle);
-        return this.getContents().visit(output, selfStyle);
-    }
-
     default boolean equals(Text text) {
         return this == text ? true
-                : this.getContents().equals(text.getContents()) && this.getStyle().equals(text.getStyle());
+                : this.getContents().equals(text.getContents())
+                && this.getTexts().equals(text.getTexts())
+                && this.getStyle().equals(text.getStyle());
     }
 
     default Text copy() {
@@ -89,6 +90,10 @@ public interface Text extends Message, FormattedText {
 
     static MutableComponent fromContents(ComponentContents contents) {
         return MutableComponentUtil.fromContents(contents);
+    }
+
+    static MutableComponent fromList(List<Text> list) {
+        return MutableComponentUtil.fromList(list);
     }
 
     static MutableComponent fromEmpty() {

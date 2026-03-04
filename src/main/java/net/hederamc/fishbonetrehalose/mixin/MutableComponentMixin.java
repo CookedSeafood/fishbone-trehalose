@@ -2,11 +2,9 @@ package net.hederamc.fishbonetrehalose.mixin;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 import net.hederamc.fishbonetrehalose.api.Text;
-import net.hederamc.fishbonetrehalose.api.TextList;
 import net.minecraft.locale.Language;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ComponentContents;
@@ -17,21 +15,12 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(MutableComponent.class)
-public abstract class MutableComponentMixin implements Component, Text, TextList {
+public abstract class MutableComponentMixin implements Component, Text {
     @Shadow private ComponentContents contents;
     @Shadow private List<Component> siblings;
     @Shadow private Style style;
     @Shadow private FormattedCharSequence visualOrderText;
     @Shadow private Language decomposedWith;
-
-    // Text
-
-    @Override
-    public void setStyle(Style style) {
-        this.style = style;
-    }
-
-    // TextList
 
     @Override
     @SuppressWarnings("unchecked")
@@ -39,11 +28,9 @@ public abstract class MutableComponentMixin implements Component, Text, TextList
         return (List<Text>) (List<?>) this.siblings;
     }
 
-    // General
-
     @Override
-    public String getString() {
-        return Component.super.getString();
+    public void setStyle(Style style) {
+        this.style = style;
     }
 
     @Override
@@ -65,13 +52,8 @@ public abstract class MutableComponentMixin implements Component, Text, TextList
     }
 
     @Override
-    public <T> Optional<T> visit(ContentConsumer<T> output) {
-        return Component.super.visit(output);
-    }
-
-    @Override
-    public <T> Optional<T> visit(StyledContentConsumer<T> output, Style parentStyle) {
-        return Component.super.visit(output, parentStyle);
+    public String getString() {
+        return Component.super.getString();
     }
 
     @Override

@@ -2,7 +2,6 @@ package net.hederamc.fishbonetrehalose.mixin;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 import net.hederamc.fishbonetrehalose.api.Text;
 import net.minecraft.locale.Language;
@@ -63,14 +62,6 @@ public abstract class MutableComponentMixin implements Component, Text {
     @Override
     @Shadow
     public abstract Style getStyle();
-
-    @Override
-    @Shadow
-    public abstract MutableComponent withStyle(Style style);
-
-    @Override
-    @Shadow
-    public abstract MutableComponent withStyle(UnaryOperator<Style> updater);
 
     @Override
     @Shadow

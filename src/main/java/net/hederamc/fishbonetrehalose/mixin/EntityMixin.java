@@ -2,11 +2,13 @@ package net.hederamc.fishbonetrehalose.mixin;
 
 import java.util.Set;
 import net.hederamc.fishbonetrehalose.api.CustomDataHolder;
-import net.hederamc.fishbonetrehalose.api.EntityApi;
 import net.hederamc.fishbonetrehalose.api.EntityTypeHolder;
 import net.hederamc.fishbonetrehalose.api.NetworkIdHolder;
+import net.hederamc.fishbonetrehalose.api.Passenger;
 import net.hederamc.fishbonetrehalose.api.PosHolder;
-import net.hederamc.fishbonetrehalose.api.TagsHolder;
+import net.hederamc.fishbonetrehalose.api.StringTaggable;
+import net.hederamc.fishbonetrehalose.api.TeamMember;
+import net.hederamc.fishbonetrehalose.api.Vehicle;
 import net.minecraft.network.protocol.game.ClientboundSetPassengersPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
@@ -27,7 +29,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Entity.class)
-public abstract class EntityMixin implements EntityTypeHolder, NetworkIdHolder, PosHolder, TagsHolder, CustomDataHolder, EntityApi{
+public abstract class EntityMixin implements EntityTypeHolder, NetworkIdHolder, PosHolder, Passenger, Vehicle, StringTaggable, TeamMember, CustomDataHolder{
     @Shadow private EntityType<?> type;
     @Shadow private int id;
     @Shadow private Level level;
@@ -132,6 +134,14 @@ public abstract class EntityMixin implements EntityTypeHolder, NetworkIdHolder, 
     }
 
     @Override
+    @Shadow
+    public abstract void setPos(Vec3 pos);
+
+    @Override
+    @Shadow
+    public abstract void setPos(double x, double y, double z);
+
+    @Override
     public double getX(float partialTickTime) {
         return Mth.lerp(partialTickTime, this.xo, this.position.x);
     }
@@ -155,6 +165,25 @@ public abstract class EntityMixin implements EntityTypeHolder, NetworkIdHolder, 
     }
 
     @Override
+    public boolean startRiding(Vehicle vehicle) {
+        return this.startRiding((Entity)vehicle);
+    }
+
+    @Override
+    @Shadow
+    public abstract void stopRiding();
+
+    @Override
+    public void addPassenger(Passenger passenger) {
+        this.addPassenger((Entity)passenger);
+    }
+
+    @Override
+    public void removePassenger(Passenger passenger) {
+        this.removePassenger((Entity)passenger);
+    }
+
+    @Override
     public Set<String> getTags() {
         return this.tags;
     }
@@ -162,6 +191,27 @@ public abstract class EntityMixin implements EntityTypeHolder, NetworkIdHolder, 
     @Override
     public boolean hasTag(String tag) {
         return this.tags.contains(tag);
+    }
+
+    @Override
+    @Shadow
+    public abstract boolean addTag(String tag);
+
+    @Override
+    @Shadow
+    public abstract boolean removeTag(String tag);
+
+    @Override
+    public PlayerTeam getOrAddToTeam(String name) {
+        Scoreboard scoreboard = this.level.getScoreboard();
+        PlayerTeam team = scoreboard.getOrAddTeam(name);
+        String scoreboardName = this.getScoreboardName();
+
+        if (!team.getPlayers().contains(scoreboardName)) {
+            scoreboard.addPlayerToTeam(scoreboardName, team);
+        }
+
+        return team;
     }
 
     @Nullable
@@ -180,18 +230,14 @@ public abstract class EntityMixin implements EntityTypeHolder, NetworkIdHolder, 
         this.customData = customData;
     }
 
-    @Override
-    public PlayerTeam getOrAddToTeam(String name) {
-        Scoreboard scoreboard = this.level.getScoreboard();
-        PlayerTeam team = scoreboard.getOrAddTeam(name);
-        String scoreboardName = this.getScoreboardName();
+    @Shadow
+    public abstract boolean startRiding(Entity vehicle);
 
-        if (!team.getPlayers().contains(scoreboardName)) {
-            scoreboard.addPlayerToTeam(scoreboardName, team);
-        }
+    @Shadow
+    public abstract void addPassenger(Entity passenger);
 
-        return team;
-    }
+    @Shadow
+    public abstract void removePassenger(Entity passenger);
 
     @Shadow
     public abstract String getScoreboardName();

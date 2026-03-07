@@ -3,7 +3,7 @@ package net.hederamc.fishbonetrehalose.api;
 import net.minecraft.world.scores.PlayerTeam;
 import org.jspecify.annotations.Nullable;
 
-public interface ServerTeamHolder {
+public interface TeamHolder {
     default boolean containsTeam(String name) {
         throw new UnsupportedOperationException();
     }

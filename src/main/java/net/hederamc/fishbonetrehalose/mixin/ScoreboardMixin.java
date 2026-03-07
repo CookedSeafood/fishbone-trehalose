@@ -6,7 +6,7 @@ import it.unimi.dsi.fastutil.objects.Reference2ObjectMap;
 import java.util.List;
 import java.util.Map;
 import net.hederamc.fishbonetrehalose.api.ObjectiveHolder;
-import net.hederamc.fishbonetrehalose.api.ServerTeamHolder;
+import net.hederamc.fishbonetrehalose.api.TeamHolder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.numbers.NumberFormat;
 import net.minecraft.world.scores.DisplaySlot;
@@ -21,7 +21,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(Scoreboard.class)
-public abstract class ScoreboardMixin implements ObjectiveHolder, ServerTeamHolder {
+public abstract class ScoreboardMixin implements ObjectiveHolder, TeamHolder {
     @Shadow private Object2ObjectMap<String, Objective> objectivesByName;
     @Shadow private Reference2ObjectMap<ObjectiveCriteria, List<Objective>> objectivesByCriteria;
     @Shadow private Map<String, PlayerScores> playerScores;
@@ -32,6 +32,11 @@ public abstract class ScoreboardMixin implements ObjectiveHolder, ServerTeamHold
     public boolean containsObjective(String name) {
         return this.objectivesByName.containsKey(name);
     }
+
+    @Nullable
+    @Override
+    @Shadow
+    public abstract Objective getObjective(@Nullable String name);
 
     @Override
     public boolean addObjective(String name, ObjectiveCriteria criteria, Component displayName,
@@ -80,6 +85,10 @@ public abstract class ScoreboardMixin implements ObjectiveHolder, ServerTeamHold
         this.onObjectiveRemoved(objective);
         return objective;
     }
+
+    @Override
+    @Shadow
+    public abstract void removeObjective(Objective objective);
 
     @Override
     public Objective getOrAddObjective(String name, ObjectiveCriteria criteria, Component displayName,

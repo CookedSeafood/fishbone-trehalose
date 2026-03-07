@@ -2,7 +2,7 @@ package net.hederamc.fishbonetrehalose.api;
 
 import java.util.Set;
 
-public interface TagsHolder {
+public interface StringTaggable {
     default Set<String> getTags() {
         throw new UnsupportedOperationException();
     }

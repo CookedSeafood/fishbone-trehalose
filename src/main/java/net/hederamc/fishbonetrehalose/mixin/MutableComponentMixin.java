@@ -22,15 +22,32 @@ public abstract class MutableComponentMixin implements Component, Text {
     @Shadow private Language decomposedWith;
 
     @Override
+    public String getString() {
+        return Component.super.getString();
+    }
+
+    @Override
+    @Shadow
+    public abstract ComponentContents getContents();
+
+    @Override
     @SuppressWarnings("unchecked")
     public List<Text> getTexts() {
         return (List<Text>) (List<?>) this.siblings;
     }
 
     @Override
+    @Shadow
+    public abstract Style getStyle();
+
+    @Override
     public void setStyle(Style style) {
         this.style = style;
     }
+
+    @Override
+    @Shadow
+    public abstract FormattedCharSequence getVisualOrderText();
 
     @Override
     public MutableComponent copy() {
@@ -49,21 +66,4 @@ public abstract class MutableComponentMixin implements Component, Text {
                         .collect(Collectors.toList()),
                 this.style);
     }
-
-    @Override
-    public String getString() {
-        return Component.super.getString();
-    }
-
-    @Override
-    @Shadow
-    public abstract ComponentContents getContents();
-
-    @Override
-    @Shadow
-    public abstract Style getStyle();
-
-    @Override
-    @Shadow
-    public abstract FormattedCharSequence getVisualOrderText();
 }

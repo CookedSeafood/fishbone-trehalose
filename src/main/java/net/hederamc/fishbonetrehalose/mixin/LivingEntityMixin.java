@@ -63,6 +63,14 @@ public abstract class LivingEntityMixin implements EnchantmentsHolder, YBodyRotY
     }
 
     @Override
+    @Shadow
+    public abstract void setYBodyRot(float yBodyRot);
+
+    @Override
+    @Shadow
+    public abstract void setYHeadRot(float yHeadRot);
+
+    @Override
     public boolean isDead() {
         return this.dead;
     }

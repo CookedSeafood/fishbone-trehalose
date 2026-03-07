@@ -24,11 +24,15 @@ transitive-inject-interface  net/minecraft/world/entity/Entity                  
 
 transitive-inject-interface  net/minecraft/world/entity/Entity                      net/hederamc/fishbonetrehalose/api/PosHolder
 
-transitive-inject-interface  net/minecraft/world/entity/Entity                      net/hederamc/fishbonetrehalose/api/TagsHolder
+transitive-inject-interface  net/minecraft/world/entity/Entity                      net/hederamc/fishbonetrehalose/api/Passenger
+
+transitive-inject-interface  net/minecraft/world/entity/Entity                      net/hederamc/fishbonetrehalose/api/Vehicle
+
+transitive-inject-interface  net/minecraft/world/entity/Entity                      net/hederamc/fishbonetrehalose/api/StringTaggable
+
+transitive-inject-interface  net/minecraft/world/entity/Entity                      net/hederamc/fishbonetrehalose/api/TeamMember
 
 transitive-inject-interface  net/minecraft/world/entity/Entity                      net/hederamc/fishbonetrehalose/api/CustomDataHolder
-
-transitive-inject-interface  net/minecraft/world/entity/Entity                      net/hederamc/fishbonetrehalose/api/EntityApi
 
 transitive-inject-interface  net/minecraft/world/entity/EntityType                  net/hederamc/fishbonetrehalose/api/IdHolder
 
@@ -56,4 +60,4 @@ transitive-inject-interface  net/minecraft/core/Holder$Reference                
 
 transitive-inject-interface  net/minecraft/world/scores/Scoreboard                  net/hederamc/fishbonetrehalose/api/ObjectiveHolder
 
-transitive-inject-interface  net/minecraft/world/scores/Scoreboard                  net/hederamc/fishbonetrehalose/api/ServerTeamHolder
+transitive-inject-interface  net/minecraft/world/scores/Scoreboard                  net/hederamc/fishbonetrehalose/api/TeamHolder

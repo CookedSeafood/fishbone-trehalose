@@ -15,6 +15,10 @@ import org.spongepowered.asm.mixin.Shadow;
 @Mixin(ItemStack.class)
 public abstract class ItemStackMixin implements RarityHolder, CustomDataHolder, DataComponentHolder {
     @Override
+    @Shadow
+    public abstract Rarity getRarity();
+
+    @Override
     public void setRarity(Rarity rarity) {
         this.set(DataComponents.RARITY, rarity);
     }

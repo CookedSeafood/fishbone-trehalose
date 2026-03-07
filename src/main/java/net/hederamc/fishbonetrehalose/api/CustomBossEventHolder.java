@@ -16,7 +16,7 @@ public interface CustomBossEventHolder {
         throw new UnsupportedOperationException();
     }
 
-    default CustomBossEvent create(RandomSource random, Identifier id, Component name) {
+    default CustomBossEvent create(RandomSource random, Identifier id, Component displayName) {
         throw new UnsupportedOperationException();
     }
 

@@ -97,6 +97,41 @@ public abstract class EntityMixin implements EntityTypeHolder, NetworkIdHolder, 
     }
 
     @Override
+    public double getX() {
+        return this.position.x;
+    }
+
+    @Override
+    public double getY() {
+        return this.position.y;
+    }
+
+    @Override
+    public double getZ() {
+        return this.position.z;
+    }
+
+    @Override
+    public Vec3 getPos() {
+        return this.position;
+    }
+
+    @Override
+    public void setX(double x) {
+        this.setPos(x, this.position.y, this.position.z);
+    }
+
+    @Override
+    public void setY(double y) {
+        this.setPos(this.position.x, y, this.position.z);
+    }
+
+    @Override
+    public void setZ(double z) {
+        this.setPos(this.position.x, this.position.y, z);
+    }
+
+    @Override
     public double getX(float partialTickTime) {
         return Mth.lerp(partialTickTime, this.xo, this.position.x);
     }
@@ -117,21 +152,6 @@ public abstract class EntityMixin implements EntityTypeHolder, NetworkIdHolder, 
         double y = Mth.lerp(partialTickTime, this.yo, this.position.y);
         double z = Mth.lerp(partialTickTime, this.zo, this.position.z);
         return new Vec3(x, y, z);
-    }
-
-    @Override
-    public void setX(double x) {
-        this.setPos(x, this.position.y, this.position.z);
-    }
-
-    @Override
-    public void setY(double y) {
-        this.setPos(this.position.x, y, this.position.z);
-    }
-
-    @Override
-    public void setZ(double z) {
-        this.setPos(this.position.x, this.position.y, z);
     }
 
     @Override

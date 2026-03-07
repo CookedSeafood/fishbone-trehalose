@@ -3,19 +3,19 @@ package net.hederamc.fishbonetrehalose.api;
 import net.minecraft.world.phys.Vec3;
 
 public interface PosHolder {
-    default double getX(float partialTickTime) {
+    default double getX() {
         throw new UnsupportedOperationException();
     }
 
-    default double getY(float partialTickTime) {
+    default double getY() {
         throw new UnsupportedOperationException();
     }
 
-    default double getZ(float partialTickTime) {
+    default double getZ() {
         throw new UnsupportedOperationException();
     }
 
-    default Vec3 getPos(float partialTickTime) {
+    default Vec3 getPos() {
         throw new UnsupportedOperationException();
     }
 
@@ -36,6 +36,22 @@ public interface PosHolder {
     }
 
     default void setPos(double x, double y, double z) {
+        throw new UnsupportedOperationException();
+    }
+
+    default double getX(float partialTickTime) {
+        throw new UnsupportedOperationException();
+    }
+
+    default double getY(float partialTickTime) {
+        throw new UnsupportedOperationException();
+    }
+
+    default double getZ(float partialTickTime) {
+        throw new UnsupportedOperationException();
+    }
+
+    default Vec3 getPos(float partialTickTime) {
         throw new UnsupportedOperationException();
     }
 }

@@ -6,7 +6,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(Player.class)
-public abstract class PlayerMixin implements ExperienceHolder {
+public abstract class PlayerMixin extends AvatarMixin implements ExperienceHolder {
     @Shadow public int experienceLevel;
     @Shadow public int totalExperience;
 

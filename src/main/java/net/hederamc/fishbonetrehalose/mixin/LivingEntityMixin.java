@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(LivingEntity.class)
-public abstract class LivingEntityMixin implements EnchantmentsHolder, YBodyRotYHeadRotHolder, DeadHolder {
+public abstract class LivingEntityMixin extends EntityMixin implements EnchantmentsHolder, YBodyRotYHeadRotHolder, DeadHolder {
     @Shadow private float yBodyRot;
     @Shadow private float yBodyRotO;
     @Shadow private float yHeadRot;

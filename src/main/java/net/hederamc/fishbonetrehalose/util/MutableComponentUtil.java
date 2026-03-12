@@ -15,6 +15,7 @@ import net.minecraft.network.chat.ComponentContents;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.contents.NbtContents;
+import net.minecraft.network.chat.contents.ObjectContents;
 import net.minecraft.network.chat.contents.PlainTextContents;
 import net.minecraft.network.chat.contents.ScoreContents;
 import net.minecraft.network.chat.contents.SelectorContents;
@@ -101,7 +102,11 @@ public final class MutableComponentUtil {
     }
 
     public static MutableComponent fromObject(ObjectInfo info) {
-        return fromContents(ObjectContentsUtil.fromInfo(info));
+        return fromContents(new ObjectContents(info, Optional.empty()));
+    }
+
+    public static MutableComponent fromObject(ObjectInfo info, Component fallback) {
+        return fromContents(new ObjectContents(info, Optional.of(fallback)));
     }
 
     public static MutableComponent fromDate(Date date) {

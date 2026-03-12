@@ -1,5 +1,6 @@
 package net.hederamc.fishbonetrehalose.mixin;
 
+import com.google.common.collect.ImmutableList;
 import java.util.Set;
 import net.hederamc.fishbonetrehalose.api.CustomDataHolder;
 import net.hederamc.fishbonetrehalose.api.EntityTypeHolder;
@@ -32,6 +33,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class EntityMixin implements EntityTypeHolder, NetworkIdHolder, PosHolder, Passenger, Vehicle, StringTaggable, TeamMember, CustomDataHolder{
     @Shadow private EntityType<?> type;
     @Shadow private int id;
+    @Shadow private ImmutableList<Entity> passengers;
+    @Nullable
+    @Shadow private Entity vehicle;
     @Shadow private Level level;
     @Shadow private double xo;
     @Shadow private double yo;
@@ -165,6 +169,16 @@ public abstract class EntityMixin implements EntityTypeHolder, NetworkIdHolder, 
     }
 
     @Override
+    public boolean isRiding() {
+        return this.vehicle != null;
+    }
+
+    @Override
+    public boolean isRiding(Vehicle vehicle) {
+        return this.vehicle == vehicle;
+    }
+
+    @Override
     public boolean startRiding(Vehicle vehicle) {
         return this.startRiding((Entity)vehicle);
     }
@@ -172,6 +186,16 @@ public abstract class EntityMixin implements EntityTypeHolder, NetworkIdHolder, 
     @Override
     @Shadow
     public abstract void stopRiding();
+
+    @Override
+    public boolean hasPassenger() {
+        return !this.passengers.isEmpty();
+    }
+
+    @Override
+    public boolean hasPassenger(Passenger passenger) {
+        return this.passengers.contains(passenger);
+    }
 
     @Override
     public void addPassenger(Passenger passenger) {
